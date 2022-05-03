@@ -15,7 +15,7 @@ naytonKorkeus = 800
 
 naytto = pygame.display.set_mode((naytonLeveys, naytonKorkeus))
 
-aika = pygame.time.Clock()
+nopeus = pygame.time.Clock()
 
 koko = 10
 
@@ -40,8 +40,8 @@ def viesti(v, vari):
 
 
 def uusiPeli():
-    peliOhi = False
     sammutaPeli = False
+    peliOhi = False
 
     leveysPunainen = 100
     korkeusPunainen = 100
@@ -66,9 +66,9 @@ def uusiPeli():
     ruokaKorkeus = round(random.randrange(
         0, naytonKorkeus - koko) / 10.0) * 10.0
 
-    while not peliOhi:
+    while not sammutaPeli:
 
-        while sammutaPeli == True:
+        while peliOhi == True:
             naytto.fill(musta)
             viesti("Hävisit pelin", pelinHaviaja)
 
@@ -77,14 +77,14 @@ def uusiPeli():
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_BACKSPACE:
-                        peliOhi = True
-                        sammutaPeli = False
+                        sammutaPeli = True
+                        peliOhi = False
                     if event.key == pygame.K_SPACE:
                         uusiPeli()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                peliOhi = True
+                sammutaPeli = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     leveysMuutosPunainen = -koko
@@ -113,14 +113,14 @@ def uusiPeli():
                     korkeusMuutosKeltainen = koko
 
         if leveysPunainen >= naytonLeveys or leveysPunainen < 0 or korkeusPunainen >= naytonKorkeus or korkeusPunainen < 0:
-            sammutaPeli = True
+            peliOhi = True
             pelinHaviaja = punainen
 
         leveysPunainen += leveysMuutosPunainen
         korkeusPunainen += korkeusMuutosPunainen
 
         if leveysKeltainen >= naytonLeveys or leveysKeltainen < 0 or korkeusKeltainen >= naytonKorkeus or korkeusKeltainen < 0:
-            sammutaPeli = True
+            peliOhi = True
             pelinHaviaja = keltainen
 
         leveysKeltainen += leveysMuutosKeltainen
@@ -139,12 +139,12 @@ def uusiPeli():
 
         for x in punainenSijainti[:-1]:
             if x == punainenPaa:
-                sammutaPeli = True
+                peliOhi = True
                 pelinHaviaja = punainen
 
         for q in punainenSijainti[:-1]:
             if q == keltainenPaa:
-                sammutaPeli = True
+                peliOhi = True
                 pelinHaviaja = keltainen
 
         keltainenPaa = []
@@ -156,12 +156,12 @@ def uusiPeli():
 
         for y in keltainenSijainti[:-1]:
             if y == keltainenPaa:
-                sammutaPeli = True
+                peliOhi = True
                 pelinHaviaja = keltainen
 
         for w in keltainenSijainti[:-1]:
             if w == punainenPaa:
-                sammutaPeli = True
+                peliOhi = True
                 pelinHaviaja = punainen
 
         punainenMato(koko, punainenSijainti)
@@ -183,7 +183,7 @@ def uusiPeli():
                 0, naytonKorkeus - koko) / 10.0) * 10.0
             keltainenPituus += 10
 
-        aika.tick(20)
+        nopeus.tick(20)
 
     pygame.quit()
     quit()

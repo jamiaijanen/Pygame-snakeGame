@@ -21,4 +21,6 @@ Pelissä kerätään pelinäytölle satunnaisesti ilmestyviä sinisiä "karkkeja
 
 Pelin voittaa se kumpi pysyy hengissä pidempään. Peli loppuu joko toisen törmätessä laitaan tai törmätessä toisen matoon.
 
+Pelin päättyessä tulee näytölle "hävisit pelin"-teksti, jonka väriksi määriytyy edellisen pelin häviäjän väri.
+
 Uuden pelin saa käynnistettyä space-nappulaa painamalla ja pelin loputtua peli sammuu backspace-nappulaa painamalla.
